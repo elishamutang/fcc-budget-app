@@ -17,7 +17,7 @@ food = budget.Category("Food")
 print(food.deposit(1000, "initial deposit"))
 print(food.withdraw(10.15, "groceries"))
 print(food.withdraw(15.89, "restaurant and more food for dessert"))
-print(food.check_funds())
+#print(food.check_funds())
 print(food.get_balance())
 # print(clothing)
 

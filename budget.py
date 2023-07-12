@@ -13,13 +13,13 @@ class Category:
     def withdraw(self, withdraw_amt, withdraw_desc=""):
         self.withdraw_amt = withdraw_amt
         self.withdraw_desc = withdraw_desc
-        if self.check_funds == False:
+        if self.check_funds(self.get_balance()) == False:
             return False
         else:
             self.ledger.append({"amount" : -withdraw_amt, "description" : withdraw_desc})
-            return True, self.ledger
+            return True
         
-    def get_balance(self): #WIP
+    def get_balance(self):
         total_spent = []
         for index, ldger in enumerate(self.ledger):
             amt_spend = [value for key, value in ldger.items()] # Creates [1000, 'initial deposit'] in amt_spend
@@ -32,13 +32,9 @@ class Category:
     def transfer(self):
         pass
 
-    def check_funds(self): #Need to fix
-        funds = self.amount
-        if funds > 0:
-            return True
-        else:
-            return False
-
+    def check_funds(self, fund_balance): #WIP
+        self.fund_balance = fund_balance
+         
 
 
         
