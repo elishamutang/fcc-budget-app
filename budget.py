@@ -1,14 +1,14 @@
 class Category:
 
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, name):
+        self.name = name
         self.ledger = list()
 
     def deposit(self, amount, description=""):
         self.amount = amount
         self.description = description
         self.ledger.append({"amount" : amount, "descrption" : description})
-        return self.ledger, self.type
+        return self.ledger, self.name
     
     def withdraw(self, withdraw_amt, withdraw_desc=""):
         self.withdraw_amt = withdraw_amt
