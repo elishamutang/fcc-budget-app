@@ -13,7 +13,7 @@ class Category:
     def withdraw(self, withdraw_amt, withdraw_desc=""):
         self.withdraw_amt = withdraw_amt
         self.withdraw_desc = withdraw_desc
-        if self.check_funds(self.get_balance()) == False:
+        if self.check_funds() == False:
             return False
         else:
             self.ledger.append({"amount" : -withdraw_amt, "description" : withdraw_desc})
