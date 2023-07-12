@@ -29,7 +29,7 @@ class Category:
         balance = self.amount + total_spent
         return balance
 
-    def transfer(self, transfer_amt, budget_category):
+    def transfer(self, transfer_amt, budget_category): #Last worked on this
         self.transfer_amt = transfer_amt
         self.budget_category = budget_category
         self.ledger.append({"amount" : -transfer_amt, "description" : budget_category})
@@ -48,4 +48,5 @@ class Category:
 
 
 
-#def create_spend_chart(categories):
+def create_spend_chart(categories):
+    pass
