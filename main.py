@@ -19,6 +19,8 @@ print(food.withdraw(10.15, "groceries"))
 print(food.withdraw(15.89, "restaurant and more food for dessert"))
 #print(food.check_funds())
 print(food.get_balance())
+clothing = budget.Category("Clothing")
+print(food.transfer(50, clothing))
 # print(clothing)
 
 #print(create_spend_chart([food, clothing, auto]))

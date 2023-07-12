@@ -8,12 +8,12 @@ class Category:
         self.amount = amount
         self.description = description
         self.ledger.append({"amount" : amount, "descrption" : description})
-        return self.ledger
+        return self.ledger, self.type
     
     def withdraw(self, withdraw_amt, withdraw_desc=""):
         self.withdraw_amt = withdraw_amt
         self.withdraw_desc = withdraw_desc
-        if self.check_funds() == False:
+        if self.check_funds(withdraw_amt) == False:
             return False
         else:
             self.ledger.append({"amount" : -withdraw_amt, "description" : withdraw_desc})
@@ -29,11 +29,14 @@ class Category:
         balance = self.amount + total_spent
         return balance
 
-    def transfer(self):
-        pass
+    def transfer(self, transfer_amt, budget_category):
+        self.transfer_amt = transfer_amt
+        self.budget_category = budget_category
+        self.ledger.append({"amount" : -transfer_amt, "description" : budget_category})
+        return self.ledger
 
-    def check_funds(self, fund_balance): #WIP
-        self.fund_balance = fund_balance
+    def check_funds(self, withdrawn): #WIP
+        self.withdrawn = withdrawn
          
 
 
