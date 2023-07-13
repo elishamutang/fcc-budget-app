@@ -2,7 +2,7 @@ class Category:
 
     def __init__(self, name):
         self.name = name
-        self.ledger = list()
+        self.ledger = list() #Instance variable
 
     def deposit(self, amount, description=""):
         self.amount = amount
@@ -32,7 +32,7 @@ class Category:
     def transfer(self, transfer_amt, budget_category): #Last worked on this
         self.transfer_amt = transfer_amt
         self.budget_category = budget_category
-        self.ledger.append({"amount" : -transfer_amt, "description" : budget_category})
+        self.ledger.append({"amount" : -transfer_amt, "description" : budget_category.name})
         return self.ledger
 
     def check_funds(self, withdrawn): #WIP
