@@ -13,7 +13,6 @@ class Category:
     def withdraw(self, withdraw_amt, withdraw_desc=""):
         self.withdraw_amt = withdraw_amt
         self.withdraw_desc = withdraw_desc
-        self.check_funds(withdraw_amt)
         if self.check_funds(withdraw_amt) == False:
             return False
         else:
@@ -33,9 +32,12 @@ class Category:
     def transfer(self, transfer_amt, budget_category): #Looks to be working
         self.transfer_amt = transfer_amt
         self.budget_category = budget_category
-        self.ledger.append({"amount" : -transfer_amt, "description" : f"Transfer to {budget_category.name}"})
-        self.ledger.append({"amount" : transfer_amt, "description" : f"Transfer from {self.name}"})
-        return self.ledger
+        if self.check_funds(transfer_amt) == True:
+            self.ledger.append({"amount" : -transfer_amt, "description" : f"Transfer to {budget_category.name}"})
+            self.ledger.append({"amount" : transfer_amt, "description" : f"Transfer from {self.name}"})
+            return True
+        else:
+            return False
 
     def check_funds(self, amt_deduct): #Looks to be working
         self.amt_deduct = amt_deduct
@@ -43,12 +45,7 @@ class Category:
         if funds > amt_deduct:
             return True
         else:
-            return False
-         
-
-
-        
-        
+            return True
         
 
 
