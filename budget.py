@@ -21,7 +21,7 @@ class Category:
         
     def get_balance(self):
         total_spent = []
-        for index, ldger in enumerate(self.ledger):
+        for index, ldger in enumerate(self.ledger): 
             amt_spend = [value for key, value in ldger.items()] # Creates [1000, 'initial deposit'] in amt_spend
             if amt_spend[1] != "initial deposit": #Checks 1st index of amt_spend
                 total_spent.append(amt_spend[0]) #Appends 0th index of amt_spend (e.g -10.15, -15.89)
@@ -33,9 +33,9 @@ class Category:
         self.transfer_amt = transfer_amt
         self.budget_category = budget_category
         if self.check_funds(transfer_amt) == True:
-            self.ledger.append({"amount" : -transfer_amt, "description" : f"Transfer to {budget_category.name}"})
-            self.ledger.append({"amount" : transfer_amt, "description" : f"Transfer from {self.name}"})
-            return True
+            self.withdraw(transfer_amt, f"Transfer to {budget_category.name}")
+            self.deposit(transfer_amt, f"Transfer from {self.name}")
+            return True, self.ledger
         else:
             return False
 
