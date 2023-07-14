@@ -30,14 +30,14 @@ class Category:
         balance = self.amount + total_spent
         return balance
 
-    def transfer(self, transfer_amt, budget_category): #Last worked on this
+    def transfer(self, transfer_amt, budget_category): #Looks to be working
         self.transfer_amt = transfer_amt
         self.budget_category = budget_category
         self.ledger.append({"amount" : -transfer_amt, "description" : f"Transfer to {budget_category.name}"})
         self.ledger.append({"amount" : transfer_amt, "description" : f"Transfer from {self.name}"})
         return self.ledger
 
-    def check_funds(self, amt_deduct): #WIP
+    def check_funds(self, amt_deduct): #Looks to be working
         self.amt_deduct = amt_deduct
         funds = self.get_balance()
         if funds > amt_deduct:
