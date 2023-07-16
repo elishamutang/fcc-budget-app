@@ -7,7 +7,7 @@ class Category:
     def deposit(self, amount, description=""):
         self.amount = amount
         self.description = description
-        self.ledger.append({"amount" : amount, "descrption" : description})
+        self.ledger.append({"amount" : amount, "description" : description})
         return self.ledger
     
     def withdraw(self, withdraw_amt, withdraw_desc=""):
@@ -23,7 +23,6 @@ class Category:
         total_spent = 0
         for ldger in self.ledger:
             total_spent += ldger["amount"]
-        print(self.ledger)
         return total_spent
 
     def transfer(self, transfer_amt, budget_category):
@@ -32,7 +31,6 @@ class Category:
         if self.check_funds(transfer_amt) == True:
             self.withdraw(transfer_amt, f"Transfer to {budget_category.name}")
             budget_category.deposit(transfer_amt, f"Transfer from {self.name}") #This was the fix
-            print(self.get_balance())
             return True
         else:
             return False
@@ -44,8 +42,17 @@ class Category:
             return True
         else:
             return False
-        
 
+    def __str__(self):
+        L1 = "*" * 30 #Title line (30 chars)
+        L1_insert = int((len(L1))/2)
+        L1_inserttitle = int(len(self.name)/2)
+        L1_title = L1[:L1_insert-L1_inserttitle] + f"{self.name}" + L1[L1_insert+L1_inserttitle:]
+        for ldger in self.ledger:
+            for key, value in ldger.items():
+                print(f"{key['description']}")
+        #return f"*************{self.name}*************\n{self.ledger[0]['description']} {self.ledger[0]['amount']:>10}\n{self.ledger[1]['description']} {self.ledger[1]['amount']:>10}\n{self.ledger[2]['description']} {self.ledger[2]['amount']:>10}\n{self.ledger[3]['description']} {self.ledger[3]['amount']:>10}"
+        return L1_title
 
 def create_spend_chart(categories):
     pass
