@@ -48,11 +48,21 @@ class Category:
         L1_insert = int((len(L1))/2)
         L1_inserttitle = int(len(self.name)/2)
         L1_title = L1[:L1_insert-L1_inserttitle] + f"{self.name}" + L1[L1_insert+L1_inserttitle:]
-        for ldger in self.ledger:
-            for key, value in ldger.items():
-                print(f"{key['description']}")
-        #return f"*************{self.name}*************\n{self.ledger[0]['description']} {self.ledger[0]['amount']:>10}\n{self.ledger[1]['description']} {self.ledger[1]['amount']:>10}\n{self.ledger[2]['description']} {self.ledger[2]['amount']:>10}\n{self.ledger[3]['description']} {self.ledger[3]['amount']:>10}"
-        return L1_title
+
+        table_format = [L1_title]
+        total_amt = 0
+
+        for entry in self.ledger:
+            desc = entry['description'][:23]
+            amount = entry['amount']
+            total_amt += entry['amount'] 
+            amount_width = 30 - len(desc) - 1
+            line = f"{desc} {amount:>{amount_width}.2f}"
+            table_format.append(line)
+
+        table_format.append(f"Total: {str(total_amt)}")
+        
+        return '\n'.join(table_format)
 
 def create_spend_chart(categories):
     pass
