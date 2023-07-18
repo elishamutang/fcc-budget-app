@@ -1,5 +1,5 @@
 import budget
-#from budget import create_spend_chart
+from budget import create_spend_chart
 
 food = budget.Category("Food")
 food.deposit(1000, "initial deposit")
@@ -15,7 +15,7 @@ auto.deposit(1000, "initial deposit")
 auto.withdraw(15)
 
 print(food)
-#print(clothing)
+print(clothing)
 
 # food = budget.Category("Food")
 # food.deposit(1000, "initial deposit")
@@ -33,4 +33,4 @@ print(food)
 # print(auto.withdraw(15))
 # print(auto.get_balance())
 
-#print(create_spend_chart([food, clothing, auto]))
+print(create_spend_chart([food, clothing, auto]))
