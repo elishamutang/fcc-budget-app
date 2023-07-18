@@ -65,4 +65,53 @@ class Category:
         return '\n'.join(table_format)
 
 def create_spend_chart(categories):
-    pass
+    
+    chart_title = "Percentage spent by category"
+    category_list = []
+    total_per_category = []
+    withdrawal_amt = dict()
+
+    #Withdrawals only
+    for category in categories:
+        withdrawal_amt[category.name] = 0 #Initialize the total withdrawal amt for each category to 0
+
+        for transaction in category.ledger:
+            if transaction["amount"] < 0:
+                withdrawal_amt[category.name] += transaction["amount"] #Add the negative amt to the total withdrawal
+    
+    total_spend = round(sum(withdrawal_amt.values()), 2) #Calculate the total spend for all categories
+
+    #Percentages
+    for category in categories:
+        category_list.append(category.name)
+        percentage = int(withdrawal_amt[category.name] * 100 / total_spend / 10) * 10 #Calculate the percentage spent for the category and round down to nearest 10
+        total_per_category.append(percentage) #Store the percentage spent
+
+    #Chart
+    chart_lines = []
+    for i in range(100, -10, -10):
+        line = f"{str(i).rjust(3)}| "
+
+        for percent in total_per_category:
+            if percent >= i:
+                line += 'o  '
+            else:
+                line += '   '
+        
+        chart_lines.append(line)
+    
+    chart_lines.append("    " + ("-" * (len(categories) * 3 + 1)))
+
+    max_name_length = max(len(category) for category in category_list)
+    for i in range(max_name_length):
+        line = "     "
+
+        for category in category_list:
+            if i < len(category):
+                line += category[i] + "  "
+            else:
+                line += "   "
+            
+        chart_lines.append(line)
+    
+    return chart_title + "\n" + "\n".join(chart_lines)
